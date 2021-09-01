@@ -4,13 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>za.ac.nwu.ac</groupId>
-    <artifactId>AccountSystemRepository</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.source>13</maven.compiler.source>
-        <maven.compiler.target>13</maven.compiler.target>
-    </properties>
+    <parent> <groupId>za.ac.nwu.ac</groupId>
+        <artifactId>Discovery-Rewards</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>AccountSystemRepository</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>za.ac.nwu.ac</groupId>
+            <artifactId>AccountSystemDomain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>za.ac.nwu.ac</groupId>
+            <artifactId>AccountSystemRepository</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
