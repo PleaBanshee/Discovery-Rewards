@@ -23,9 +23,5 @@
             <artifactId>AccountSystemLogic</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>za.ac.nwu.ac</groupId>
-            <artifactId>AccountSystemRepository</artifactId>
-        </dependency>
     </dependencies>
 </project>
