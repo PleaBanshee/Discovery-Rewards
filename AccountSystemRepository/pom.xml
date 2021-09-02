@@ -5,7 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <parent> <groupId>za.ac.nwu.ac</groupId>
+    <parent>
+        <groupId>za.ac.nwu.ac</groupId>
         <artifactId>Discovery-Rewards</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -16,10 +17,8 @@
         <dependency>
             <groupId>za.ac.nwu.ac</groupId>
             <artifactId>AccountSystemDomain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>za.ac.nwu.ac</groupId>
-            <artifactId>AccountSystemRepository</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

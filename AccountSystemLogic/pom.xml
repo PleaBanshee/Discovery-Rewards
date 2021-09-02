@@ -15,10 +15,13 @@
         <dependency>
             <groupId>za.ac.nwu.ac</groupId>
             <artifactId>AccountSystemDomain</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>za.ac.nwu.ac</groupId>
-            <artifactId>AccountSystemRepository</artifactId>
+            <artifactId>AccountSystemTranslator</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
