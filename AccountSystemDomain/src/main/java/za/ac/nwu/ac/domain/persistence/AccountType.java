@@ -24,6 +24,7 @@ public class AccountType implements Serializable {
     }
 
     public AccountType() {
+
     }
 
     @Id
