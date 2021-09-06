@@ -94,11 +94,11 @@
                 <artifactId>ojdbc8</artifactId>
                 <version>19.3.0.0</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <!--<version>5.2.8.RELEASE</version>-->
-            </dependency>
+                <version>5.2.8.RELEASE</version>
+            </dependency> -->
         </dependencies>
     </dependencyManagement>
 

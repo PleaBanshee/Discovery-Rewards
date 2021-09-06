@@ -94,7 +94,7 @@ public class AccountTypeDto implements Serializable {
     }
 
     @JsonIgnore
-    public AccountType getAcountType() {
+    public AccountType getAccountType() {
         return new AccountType(getMnemonic(),getAccountTypeName(),getCreationDate());
     }
 
