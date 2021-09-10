@@ -8,6 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.6.RELEASE</version>
+        <relativePath/>
     </parent>
 
     <groupId>za.ac.nwu.ac</groupId>
@@ -99,11 +100,6 @@
                 <groupId>com.oracle.ojdbc</groupId>
                 <artifactId>ojdbc8</artifactId>
                 <version>19.3.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>5.2.3.Final</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
