@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ACCOUNT_TRANSACTION",schema = "HR")
+@Table(name = "accountTransaction",schema = "HR")
 public class AccountTransaction implements Serializable {
 
     private Long accountTxID;
@@ -27,9 +27,9 @@ public class AccountTransaction implements Serializable {
     }
 
     @Id
-    @SequenceGenerator(name="ACC_TX_SEQ",sequenceName = "ACC_TX_SEQ",allocationSize = 1)
+    @SequenceGenerator(name="ACC_TX_SEQ",sequenceName = "HR.ACC_TX_SEQ",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ACC_TX_SEQ")
-    @Column(name = "ACCOUNT_TX_ID")
+    @Column(name = "accountTxID")
     public Long getAccountTxID() {
         return accountTxID;
     }
@@ -38,9 +38,9 @@ public class AccountTransaction implements Serializable {
         this.accountTxID = accountTxID;
     }
 
-    // Laze fetch: fetch data when needed
+    // Lazy fetch: fetch data when needed
     @ManyToOne(fetch = FetchType.LAZY) // One account can have many transactions
-    @JoinColumn(name="ACCOUNT_TYPE_ID")
+    @JoinColumn(name="accountTypeID")
     public AccountType getAccountTypeID() {
         return accountTypeID;
     }
@@ -49,16 +49,7 @@ public class AccountTransaction implements Serializable {
         this.accountTypeID = accountTypeID;
     }
 
-    @Column(name="MEMBER_ID")
-    public Long getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(Long memberID) {
-        this.memberID = memberID;
-    }
-
-    @Column(name="AMOUNT")
+    @Column(name="amount")
     public Long getAmount() {
         return amount;
     }
@@ -67,7 +58,16 @@ public class AccountTransaction implements Serializable {
         this.amount = amount;
     }
 
-    @Column(name="TX_DATE")
+    @Column(name="memberID")
+    public Long getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(Long memberID) {
+        this.memberID = memberID;
+    }
+
+    @Column(name="txDate")
     public LocalDate getTxDate() {
         return txDate;
     }
