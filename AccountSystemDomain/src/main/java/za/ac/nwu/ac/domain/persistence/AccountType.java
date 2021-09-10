@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "ACCOUNT_TYPE",schema = "HR")
+@Table(name = "accountType",schema = "HR")
 public class AccountType implements Serializable {
 
     private Long accountTypeID;
@@ -31,9 +31,9 @@ public class AccountType implements Serializable {
     }
 
     @Id
-    @SequenceGenerator(name="ACC_TYPE_SEQ",sequenceName = "ACC_TYPE_SEQ",allocationSize = 1)
+    @SequenceGenerator(name="ACC_TYPE_SEQ",sequenceName = "HR.ACC_TYPE_SEQ",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ACC_TYPE_SEQ")
-    @Column(name = "ACCOUNT_TYPE_ID")
+    @Column(name = "accountTypeID")
     public long getAccountTypeID() {
         return accountTypeID;
     }
@@ -42,16 +42,7 @@ public class AccountType implements Serializable {
         this.accountTypeID = accountTypeID;
     }
 
-    @Column(name="Mnemonic")
-    public String getMnemonic() {
-        return mnemonic;
-    }
-
-    public void setMnemonic(String mnemonic) {
-        this.mnemonic = mnemonic;
-    }
-
-    @Column(name="ACCOUNT_TYPE_NAME")
+    @Column(name="accountTypeName")
     public String getAccountTypeName() {
         return accountTypeName;
     }
@@ -60,10 +51,24 @@ public class AccountType implements Serializable {
         this.accountTypeName = accountTypeName;
     }
 
-    @Column(name="CREATION_DATE")
+    @Column(name="creationDate")
     public LocalDate getCreationDate() {
         return creationDate;
     }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Column(name="mnemonic")
+    public String getMnemonic() {
+        return mnemonic;
+    }
+
+    public void setMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
+    }
+
 
     // One Account can have many Transactions.
     // mappedBy: sets equal to variable in other Entity
@@ -72,10 +77,6 @@ public class AccountType implements Serializable {
     @OneToMany(targetEntity = AccountTransaction.class,fetch = FetchType.LAZY,mappedBy = "accountType",orphanRemoval = true,cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions; // returns a list without duplicate values
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
     }
 
     @Override
