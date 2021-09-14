@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "accountTransaction",schema = "HR")
 public class AccountTransaction implements Serializable {
 
+    private static final long serialVersionUID = 1199041377884282633L;
     private Long accountTxID;
     private AccountType accountTypeID; // Foreign Key
     private Long memberID;
@@ -26,16 +27,16 @@ public class AccountTransaction implements Serializable {
     public AccountTransaction() {
     }
 
+    public void setAccountTxID(Long accountTxID) {
+        this.accountTxID = accountTxID;
+    }
+
     @Id
     @SequenceGenerator(name="ACC_TX_SEQ",sequenceName = "HR.ACC_TX_SEQ",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ACC_TX_SEQ")
     @Column(name = "accountTxID")
     public Long getAccountTxID() {
         return accountTxID;
-    }
-
-    public void setAccountTxID(Long accountTxID) {
-        this.accountTxID = accountTxID;
     }
 
     // Lazy fetch: fetch data when needed
@@ -49,13 +50,8 @@ public class AccountTransaction implements Serializable {
         this.accountTypeID = accountTypeID;
     }
 
-    @Column(name="amount")
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setMemberID(Long memberID) {
+        this.memberID = memberID;
     }
 
     @Column(name="memberID")
@@ -63,17 +59,22 @@ public class AccountTransaction implements Serializable {
         return memberID;
     }
 
-    public void setMemberID(Long memberID) {
-        this.memberID = memberID;
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    @Column(name="amount")
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setTxDate(LocalDate txDate) {
+        this.txDate = txDate;
     }
 
     @Column(name="txDate")
     public LocalDate getTxDate() {
         return txDate;
-    }
-
-    public void setTxDate(LocalDate txDate) {
-        this.txDate = txDate;
     }
 
     @Override

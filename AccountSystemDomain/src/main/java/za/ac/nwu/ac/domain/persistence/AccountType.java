@@ -10,13 +10,14 @@ import java.util.Set;
 @Table(name = "accountType",schema = "HR")
 public class AccountType implements Serializable {
 
+    private static final long serialVersionUID = 3866606557126890054L;
     private Long accountTypeID;
     private String mnemonic;
     private String accountTypeName;
     private LocalDate creationDate;
     private Set<AccountTransaction> accountTransactions;
 
-    public AccountType(long accountTypeID, String mnemonic, String accountTypeName, LocalDate creationDate) {
+    public AccountType(Long accountTypeID, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeID = accountTypeID;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
@@ -30,34 +31,20 @@ public class AccountType implements Serializable {
     public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate) {
     }
 
+    public void setAccountTypeID(Long accountTypeID) {
+        this.accountTypeID = accountTypeID;
+    }
+
     @Id
     @SequenceGenerator(name="ACC_TYPE_SEQ",sequenceName = "HR.ACC_TYPE_SEQ",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ACC_TYPE_SEQ")
     @Column(name = "accountTypeID")
-    public long getAccountTypeID() {
+    public Long getAccountTypeID() {
         return accountTypeID;
     }
 
-    public void setAccountTypeID(long accountTypeID) {
-        this.accountTypeID = accountTypeID;
-    }
-
-    @Column(name="accountTypeName")
-    public String getAccountTypeName() {
-        return accountTypeName;
-    }
-
-    public void setAccountTypeName(String accountTypeName) {
-        this.accountTypeName = accountTypeName;
-    }
-
-    @Column(name="creationDate")
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setMnemonic(String mnemonic) {
+        this.mnemonic = mnemonic;
     }
 
     @Column(name="mnemonic")
@@ -65,18 +52,37 @@ public class AccountType implements Serializable {
         return mnemonic;
     }
 
-    public void setMnemonic(String mnemonic) {
-        this.mnemonic = mnemonic;
+    public void setAccountTypeName(String accountTypeName) {
+        this.accountTypeName = accountTypeName;
     }
+
+    @Column(name="")
+    public String getAccountTypeName() {
+        return accountTypeName;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Column(name="creationDate")
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
 
 
     // One Account can have many Transactions.
     // mappedBy: sets equal to variable in other Entity
     // orphanRemoval: everything that gets deleted in this entity, will also be removed from the other entity
     // cascade: determines whether to save data entity values
-    @OneToMany(targetEntity = AccountTransaction.class,fetch = FetchType.LAZY,mappedBy = "accountType",orphanRemoval = true,cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = AccountTransaction.class,fetch = FetchType.LAZY,mappedBy = "accountTypeID",orphanRemoval = true,cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions; // returns a list without duplicate values
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
+        this.accountTransactions = accountTransactions;
     }
 
     @Override
