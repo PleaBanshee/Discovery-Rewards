@@ -26,7 +26,7 @@ public class AccountTypeController {
 
     @Autowired // injects an object or Bean into your class
     public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow,
-                                 @Qualifier CreateAccountTypeFlow createAccountTypeFlow) {
+                                 @Qualifier("createAccountTypeFlowName") CreateAccountTypeFlow createAccountTypeFlow) {
         this.fetchAccountTypeFlow = fetchAccountTypeFlow;
         this.createAccountTypeFlow = createAccountTypeFlow;
     }
@@ -58,7 +58,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
-    @GetMapping("/all") // fetch all configured account types
+    @GetMapping("{mnemonic}") // fetch all configured account types
     @ApiOperation(value = "Fetch the specified Account Type", notes = "Fetches the Account Type based on the specific mnemonic")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Goal Found", response = GeneralResponse.class),
