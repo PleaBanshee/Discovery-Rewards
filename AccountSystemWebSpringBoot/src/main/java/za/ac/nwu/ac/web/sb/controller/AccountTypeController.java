@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
-import za.ac.nwu.ac.translator.CreateAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 
 import java.util.List;
 
