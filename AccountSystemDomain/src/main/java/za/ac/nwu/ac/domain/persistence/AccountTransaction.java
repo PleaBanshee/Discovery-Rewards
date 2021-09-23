@@ -50,7 +50,7 @@ public class AccountTransaction implements Serializable {
         this.accountTypeId = accountTypeId;
     }
 
-    public void setMemberID(Long memberID) {
+    public void setMemberID(Long memberId) {
         this.memberId = memberId;
     }
 
