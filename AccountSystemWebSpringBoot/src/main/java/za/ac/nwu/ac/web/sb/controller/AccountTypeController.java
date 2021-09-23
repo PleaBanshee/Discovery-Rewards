@@ -66,7 +66,7 @@ public class AccountTypeController {
             @ApiResponse(code = 404, message = "Resource Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTypeDto>> getAccountType(
-            @ApiParam(value = "Mnemonic that uniquely identifies the account type",example = "Miles",
+            @ApiParam(value = "Mnemonic that uniquely identifies the account type",example = "MILES",
                     name = "mnemonic",required = true)
             @PathVariable("mnemonic") final String mnemonic
     ) {

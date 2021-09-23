@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 @Repository
-public interface AccountTypeRepository extends JpaRepository<AccountType, Long> {
+public interface AccountTypeRepository extends JpaRepository<AccountType, Long> {  // JPARepository<Type,ID_TYPE>
 
     @Query( // uses hibernate sql. Refers to database entities in application. More optimal for use on single tables
             value = "SELECT "+"at "+"FROM "+"AccountType at "+"WHERE at.mnemonic = :mnemonic"
     )
-    AccountType getAccountTypeByMnemonic(String mnemonic); // JPARepository<Type,ID_TYPE>
+    AccountType getAccountTypeByMnemonic(String mnemonic);
 
     @Query( // Use this if you're working with multiple tables, joins etc.
            value = "SELECT new za.ac.nwu.ac.domain.dto.AccountTypeDto("+
