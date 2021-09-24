@@ -3,14 +3,14 @@ package za.ac.nwu.ac.logic.flow.impl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-    import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.*;
 
 class FetchAccountTypeFlowImplTest {
 
     private FetchAccountTypeFlowImpl testClass;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         testClass = new FetchAccountTypeFlowImpl(null);
     }
 
