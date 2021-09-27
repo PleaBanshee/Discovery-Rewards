@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "ACCOUNT_TYPE",schema = "HR")
 public class AccountType implements Serializable {
 
-    private static final long serialVersionUID = 3866606557126890054L;
+    // private static final long serialVersionUID = 3866606557126890054L;
     private Long accountTypeId;
     private String mnemonic;
     private String accountTypeName;
