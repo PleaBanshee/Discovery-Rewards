@@ -16,7 +16,7 @@ public class AccountTransaction implements Serializable {
     private Long memberId;
     private Long amount;
     private LocalDate txDate;
-    private AccountTransactionDetails accountTransactionDetails;
+    private AccountTransactionDetails details;
 
     public AccountTransaction(Long accountTxId, AccountType accountTypeId, Long memberId, Long amount, LocalDate txDate) {
         this.accountTxId = accountTxId;
@@ -80,8 +80,12 @@ public class AccountTransaction implements Serializable {
     }
 
     @OneToOne(targetEntity = AccountTransactionDetails.class,fetch = FetchType.LAZY,mappedBy = "accountTransactionDetailsId",orphanRemoval = true,cascade = CascadeType.PERSIST)
-    public AccountTransactionDetails get() {
-        return accountTransactionDetails; // returns a list without duplicate values
+    public AccountTransactionDetails getDetails() {
+        return details; // returns a list without duplicate values
+    }
+
+    public void setDetails(AccountTransactionDetails details) {
+        this.details = details;
     }
 
     @Override
