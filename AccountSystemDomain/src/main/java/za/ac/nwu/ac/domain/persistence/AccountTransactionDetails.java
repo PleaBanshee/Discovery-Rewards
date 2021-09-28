@@ -2,6 +2,7 @@ package za.ac.nwu.ac.domain.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ACCOUNT_TX_DETAILS", schema = "HR")
@@ -62,5 +63,30 @@ public class AccountTransactionDetails implements Serializable {
 
     public void setTransactionVal(Long transactionVal) {
         this.transactionVal = transactionVal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountTransactionDetails that = (AccountTransactionDetails) o;
+        return Objects.equals(accountTransactionDetailsId, that.accountTransactionDetailsId) &&
+                Objects.equals(accountTransaction, that.accountTransaction) &&
+                Objects.equals(memberName, that.memberName) && Objects.equals(transactionVal, that.transactionVal);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountTransactionDetailsId, accountTransaction, memberName, transactionVal);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountTransactionDetails{" +
+                "accountTransactionDetailsId=" + accountTransactionDetailsId +
+                ", accountTransaction=" + accountTransaction +
+                ", memberName='" + memberName + '\'' +
+                ", transactionVal=" + transactionVal +
+                '}';
     }
 }
