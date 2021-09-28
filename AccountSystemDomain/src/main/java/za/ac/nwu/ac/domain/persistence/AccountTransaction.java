@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNT_TRANSACTION",schema = "HR")
@@ -15,6 +16,7 @@ public class AccountTransaction implements Serializable {
     private Long memberId;
     private Long amount;
     private LocalDate txDate;
+    private AccountTransactionDetails accountTransactionDetails;
 
     public AccountTransaction(Long accountTxId, AccountType accountTypeId, Long memberId, Long amount, LocalDate txDate) {
         this.accountTxId = accountTxId;
@@ -75,6 +77,11 @@ public class AccountTransaction implements Serializable {
     @Column(name="TX_Date")
     public LocalDate getTxDate() {
         return txDate;
+    }
+
+    @OneToOne(targetEntity = AccountTransactionDetails.class,fetch = FetchType.LAZY,mappedBy = "accountTransactionDetailsId",orphanRemoval = true,cascade = CascadeType.PERSIST)
+    public AccountTransactionDetails get() {
+        return accountTransactionDetails; // returns a list without duplicate values
     }
 
     @Override
