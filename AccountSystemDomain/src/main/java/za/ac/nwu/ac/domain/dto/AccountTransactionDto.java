@@ -1,12 +1,13 @@
 package za.ac.nwu.ac.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
-import za.ac.nwu.ac.domain.persistence.AccountTransactionDetails;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @ApiModel(value = "AccountTransaction", description = "A DTO that represents the AccountTransactions")
 public class AccountTransactionDto implements Serializable {
@@ -32,6 +33,7 @@ public class AccountTransactionDto implements Serializable {
         this.amount = amount;
         this.txDate = txDate;
     }
+
     public AccountTransactionDto(Long accountTxId, String accountTypeMnemonic, Long memberId, Long amount,
                                  LocalDate txDate, AccountTransactionDetailsDto details) {
         this.accountTxId = accountTxId;
@@ -51,6 +53,12 @@ public class AccountTransactionDto implements Serializable {
         if (accountTransaction.getDetails() != null) {
             this.details = new AccountTransactionDetailsDto(accountTransaction.getDetails());
         }
+    }
+
+    @JsonIgnore
+    public AccountTransaction buildAccountTransaction(AccountType accountType) {
+        return new AccountTransaction(this.getAccountTxId(), accountType, this.getMemberId(),
+                this.getAmount(), this.getTxDate());
     }
 
     public Long getAccountTxId() {
@@ -91,5 +99,42 @@ public class AccountTransactionDto implements Serializable {
 
     public void setTxDate(LocalDate txDate) {
         this.txDate = txDate;
+    }
+
+    public AccountTransactionDetailsDto getDetails() {
+        return details;
+    }
+
+    public void setDetails(AccountTransactionDetailsDto details) {
+        this.details = details;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountTransactionDto that = (AccountTransactionDto) o;
+        return Objects.equals(accountTxId, that.accountTxId) && Objects.equals(accountTypeMnemonic,
+                that.accountTypeMnemonic) && Objects.equals(accountTypeId, that.accountTypeId) &&
+                Objects.equals(memberId, that.memberId) && Objects.equals(amount, that.amount) &&
+                Objects.equals(txDate, that.txDate) && Objects.equals(details, that.details);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountTxId, accountTypeMnemonic, accountTypeId, memberId, amount, txDate, details);
+    }
+
+    @Override
+    public String toString() {
+        return "AccountTransactionDto{" +
+                "accountTxId=" + accountTxId +
+                ", accountTypeMnemonic='" + accountTypeMnemonic + '\'' +
+                ", accountTypeId=" + accountTypeId +
+                ", memberId=" + memberId +
+                ", amount=" + amount +
+                ", txDate=" + txDate +
+                ", details=" + details +
+                '}';
     }
 }

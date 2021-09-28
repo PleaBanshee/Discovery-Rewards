@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "ACCOUNT_TRANSACTION",schema = "HR")
@@ -79,9 +78,9 @@ public class AccountTransaction implements Serializable {
         return txDate;
     }
 
-    @OneToOne(targetEntity = AccountTransactionDetails.class,fetch = FetchType.LAZY,mappedBy = "accountTransactionDetailsId",orphanRemoval = true,cascade = CascadeType.PERSIST)
+    @OneToOne(targetEntity = AccountTransactionDetails.class,fetch = FetchType.LAZY,mappedBy = "accountTransaction",orphanRemoval = true,cascade = CascadeType.PERSIST)
     public AccountTransactionDetails getDetails() {
-        return details; // returns a list without duplicate values
+        return details;
     }
 
     public void setDetails(AccountTransactionDetails details) {
