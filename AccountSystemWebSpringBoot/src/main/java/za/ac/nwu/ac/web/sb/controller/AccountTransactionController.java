@@ -10,13 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
-import za.ac.nwu.ac.domain.dto.AccountTypeDto;
-import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
-import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
-import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
-import za.ac.nwu.ac.logic.flow.impl.CreateAccountTransactionFlow;
-import za.ac.nwu.ac.logic.flow.impl.FetchAccountTransactionFlow;
+import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
+import za.ac.nwu.ac.logic.flow.FetchAccountTransactionFlow;
 
 import java.util.List;
 
@@ -71,7 +67,7 @@ public class AccountTransactionController {
     public ResponseEntity<GeneralResponse<AccountTransactionDto>> getAccountTransaction(
             @ApiParam(value = "Transaction ID that uniquely identifies the Account Transaction",example = "50002",
                     name = "transactionId",required = true)
-            @PathVariable("transactionId") final String mnemonic
+            @PathVariable("transactionId") final Long transactionId
     ) {
         AccountTransactionDto accountTransactions = fetchAccountTransactionFlow.getAccountTransactionById(transactionId);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactions);
