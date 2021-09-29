@@ -72,4 +72,14 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             throw new RuntimeException("Unable to read from the database",e);
         }
     }
+
+    @Override
+    public AccountType getAccountTypeDbByMnemonic(String mnemonic) {
+        try {
+            AccountType accountType = accountTypeRepository.getAccountTypeDbByMnemonic(mnemonic);
+            return accountType;
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to read from the database",e);
+        }
+    }
 }
