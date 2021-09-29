@@ -15,13 +15,15 @@ import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.impl.CreateAccountTransactionFlow;
+import za.ac.nwu.ac.logic.flow.impl.FetchAccountTransactionFlow;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("account-transaction")
 public class AccountTransactionController {
-   /* private final FetchAccountTransactionFlow fetchAccountTransactionFlow;
+    private final FetchAccountTransactionFlow fetchAccountTransactionFlow;
     private final CreateAccountTransactionFlow createAccountTransactionFlow;
 
     @Autowired
@@ -30,9 +32,9 @@ public class AccountTransactionController {
 
         this.fetchAccountTransactionFlow = fetchAccountTransactionFlow;
         this.createAccountTransactionFlow = createAccountTransactionFlow;
-    }*/
+    }
 
-   /* @GetMapping("/all") // fetch all configured account types
+    @GetMapping("/all") // fetch all configured account types
     @ApiOperation(value = "Gets all the configured Account Transactions", notes = "Returns a list of Account Transactions")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account Types Returned", response = GeneralResponse.class),
@@ -43,9 +45,9 @@ public class AccountTransactionController {
         List<AccountTransactionDto> accountTransactions = fetchAccountTransactionFlow.getAllAccountTransactions();
         GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, accountTransactions);
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
+    }
 
-    /*@PostMapping("")
+    @PostMapping("")
     @ApiOperation(value = "Create a new Account Transaction",notes = "Creates a new Account Transaction in the database")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Account created successfully", response = GeneralResponse.class),
@@ -57,9 +59,9 @@ public class AccountTransactionController {
         AccountTransactionDto accountTransactionResponse = createAccountTransactionFlow.create(accountTransaction);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true,accountTransactionResponse);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
-    }*/
+    }
 
-    /*@GetMapping("/{transactionId}") // fetch Transactions by Transaction ID
+    @GetMapping("/{transactionId}") // fetch Transactions by Transaction ID
     @ApiOperation(value = "Fetches the specified Account Transaction", notes = "Fetches the Account Transaction based on the Transaction ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Goal Found", response = GeneralResponse.class),
@@ -74,5 +76,5 @@ public class AccountTransactionController {
         AccountTransactionDto accountTransactions = fetchAccountTransactionFlow.getAccountTransactionById(transactionId);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactions);
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
+    }
 }
