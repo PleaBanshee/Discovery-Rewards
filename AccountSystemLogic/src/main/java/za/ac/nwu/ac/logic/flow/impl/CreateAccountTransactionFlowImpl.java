@@ -1,5 +1,6 @@
 package za.ac.nwu.ac.logic.flow.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
@@ -10,12 +11,16 @@ import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 import za.ac.nwu.ac.translator.AccountTransactionDetailsTranslator;
 import za.ac.nwu.ac.translator.AccountTransactionTranslator;
 
-@Component
+import javax.transaction.Transactional;
+
+@Transactional
+@Component("createAccountTransactionFlowName")
 public class CreateAccountTransactionFlowImpl implements CreateAccountTransactionFlow {
     private final AccountTransactionTranslator accountTransactionTranslator;
     private final AccountTransactionDetailsTranslator accountTransactionDetailsTranslator;
     private final FetchAccountTypeFlow fetchAccountTypeFlow;
 
+    @Autowired
     public CreateAccountTransactionFlowImpl(AccountTransactionTranslator accountTransactionTranslator,
                                             AccountTransactionDetailsTranslator accountTransactionDetailsTranslator,
                                             FetchAccountTypeFlow fetchAccountTypeFlow) {

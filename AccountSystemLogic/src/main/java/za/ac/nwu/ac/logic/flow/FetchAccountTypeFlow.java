@@ -1,6 +1,7 @@
 package za.ac.nwu.ac.logic.flow;
 
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
+import za.ac.nwu.ac.domain.persistence.AccountType;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ public interface FetchAccountTypeFlow {
 
     AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 
-    AccountTypeDto getAccountTypeDbByMnemonic(String mnemonic);
+    AccountType getAccountTypeDbByMnemonic(String mnemonic);
 }
