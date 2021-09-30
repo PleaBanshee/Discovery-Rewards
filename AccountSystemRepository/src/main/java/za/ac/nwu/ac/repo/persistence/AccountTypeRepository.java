@@ -25,10 +25,4 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Long> 
                     "FROM "+"HR.ACCOUNT_TYPE "+"WHERE MNEMONIC = :mnemonic", nativeQuery = true
     )
     AccountType getAccountTypeByMnemonicNativeQuery(String mnemonic);
-
-    @Query(
-            value = "SELECT "+"at.accountTypeName,"+"at.creationDate,"+
-                    "at.mnemonic "+"FROM "+"AccountType at "+"WHERE at.mnemonic = :mnemonic"
-    )
-    AccountType getAccountTypeDbByMnemonic(String mnemonic);
 }

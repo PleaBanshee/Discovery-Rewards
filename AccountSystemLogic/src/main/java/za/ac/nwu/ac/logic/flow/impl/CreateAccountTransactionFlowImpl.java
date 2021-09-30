@@ -3,44 +3,28 @@ package za.ac.nwu.ac.logic.flow.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
+import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
-import za.ac.nwu.ac.domain.persistence.AccountTransactionDetails;
-import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.logic.flow.CreateAccountTransactionFlow;
-import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
-import za.ac.nwu.ac.translator.AccountTransactionDetailsTranslator;
 import za.ac.nwu.ac.translator.AccountTransactionTranslator;
+import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
-import javax.transaction.Transactional;
+import java.time.LocalDate;
 
-@Transactional
 @Component("createAccountTransactionFlowName")
 public class CreateAccountTransactionFlowImpl implements CreateAccountTransactionFlow {
-    private final AccountTransactionTranslator accountTransactionTranslator;
-    private final AccountTransactionDetailsTranslator accountTransactionDetailsTranslator;
-    private final FetchAccountTypeFlow fetchAccountTypeFlow;
+    private final AccountTransactionTranslator translator;
 
     @Autowired
-    public CreateAccountTransactionFlowImpl(AccountTransactionTranslator accountTransactionTranslator,
-                                            AccountTransactionDetailsTranslator accountTransactionDetailsTranslator,
-                                            FetchAccountTypeFlow fetchAccountTypeFlow) {
-        this.accountTransactionTranslator = accountTransactionTranslator;
-        this.accountTransactionDetailsTranslator = accountTransactionDetailsTranslator;
-        this.fetchAccountTypeFlow = fetchAccountTypeFlow;
+    public CreateAccountTransactionFlowImpl(AccountTransactionTranslator translator) {
+        this.translator = translator;
     }
 
     @Override
-    public AccountTransactionDto create(AccountTransactionDto accountTransactionDto) {
-        accountTransactionDto.setAccountTxId(null);
-        AccountType accountType = fetchAccountTypeFlow.getAccountTypeDbByMnemonic(accountTransactionDto.getAccountTypeMnemonic());
-        AccountTransaction accountTransaction = accountTransactionDto.buildAccountTransaction(accountType);
-        AccountTransaction createdAccountTransaction = accountTransactionTranslator.save(accountTransaction);
-
-        if (accountTransactionDto.getDetails() != null) {
-            AccountTransactionDetails accountTransactionDetails = accountTransactionDto.getDetails().buildAccountTransactionDetails(createdAccountTransaction);
-            accountTransactionDetailsTranslator.save(accountTransactionDetails);
+    public AccountTransactionDto create(AccountTransactionDto accountTransaction) {
+        if (null == accountTransaction.getTxDate()) {
+            accountTransaction.setTxDate(LocalDate.now());
         }
-        return new AccountTransactionDto(createdAccountTransaction);
+        return translator.create(accountTransaction);
     }
-
 }

@@ -57,6 +57,7 @@ public class CreateAccountTypeFlowImplTest {
     public void testExceptions() {
         when(translator.getAccountTypeDtoByMnemonic(anyString())).thenThrow(new RuntimeException());
         try {
+            AccountTypeDto accountTypeDto = translator.getAccountTypeDtoByMnemonic("");
             flow.create(new AccountTypeDto());
             fail("Should throw an exception");
         } catch (Exception e) {
