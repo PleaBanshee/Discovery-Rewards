@@ -79,7 +79,7 @@ public class AccountType implements Serializable {
     // mappedBy: sets equal to variable in other Entity
     // orphanRemoval: everything that gets deleted in this entity, will also be removed from the other entity
     // cascade: determines whether to save data entity values
-    @OneToMany(targetEntity = AccountTransaction.class,fetch = FetchType.LAZY,mappedBy = "accountTypeId")
+    @OneToMany(targetEntity = AccountTransaction.class,fetch = FetchType.LAZY,mappedBy = "accountTypeId",orphanRemoval = true,cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions; // returns a list without duplicate values
     }
