@@ -17,16 +17,17 @@ public class FetchAccountTransactionFlowImpl implements FetchAccountTransactionF
         this.translator = translator;
     }
 
-    public List<AccountTransactionDto> getAllTransactions() {
-        List<AccountTransactionDto> accountTransactionDtos = new ArrayList<>();
-        for (AccountTransaction accountTransaction: translator.getAllTransactions()) {
-            accountTransactionDtos.add(new AccountTransactionDto(accountTransaction));
-        }
-        return accountTransactionDtos;
+    @Override
+    public List<AccountTransactionDto> getAllTransactions()
+    {
+        return translator.getAllTransactions();
     }
 
-    public AccountTransactionDto getAccountTransactionById(Long id) {
-        AccountTransaction accountTransaction = translator.getAccountTransactionById(id);
-        return accountTransaction != null ? new AccountTransactionDto(accountTransaction) : null;
+
+    @Override
+    public AccountTransactionDto getAccountTransactionByMnemonic(Long memberId)
+    {
+        return translator.getAccountTransactionDtoByMnemonic(memberId);
     }
+
 }

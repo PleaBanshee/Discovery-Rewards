@@ -57,19 +57,19 @@ public class AccountTransactionController {
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
-    @GetMapping("/{transactionId}") // fetch Transactions by Transaction ID
-    @ApiOperation(value = "Fetches the specified Account Transaction", notes = "Fetches the Account Transaction based on the Transaction ID")
+    @GetMapping("/{memberId}") // fetch Transactions by Member ID
+    @ApiOperation(value = "Fetches the specified Account Transaction", notes = "Fetches the Account Transaction based on the member ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Goal Found", response = GeneralResponse.class),
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Resource Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
     public ResponseEntity<GeneralResponse<AccountTransactionDto>> getAccountTransaction(
-            @ApiParam(value = "Transaction ID that uniquely identifies the Account Transaction",example = "50002",
-                    name = "transactionId",required = true)
-            @PathVariable("transactionId") final Long transactionId
+            @ApiParam(value = "Member ID that uniquely identifies the Account Transaction",example = "50002",
+                    name = "memberId",required = true)
+            @PathVariable("memberId") final Long memberId
     ) {
-        AccountTransactionDto accountTransactions = fetchAccountTransactionFlow.getAccountTransactionById(transactionId);
+        AccountTransactionDto accountTransactions = fetchAccountTransactionFlow.getAccountTransactionByMnemonic(memberId);
         GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactions);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

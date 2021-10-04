@@ -21,39 +21,50 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
         this.repo = repo;
     }
 
-    public AccountTransaction save(AccountTransaction accountTransaction) {
-        try {
-            return repo.save(accountTransaction);
+    @Override
+    public List<AccountTransactionDto> getAllTransactions()
+    {
+        List<AccountTransactionDto> accountTransactionDto = new ArrayList<>();
+        try{
+            for (AccountTransaction accountTransaction : repo.findAll()){
+                accountTransactionDto.add(new AccountTransactionDto(accountTransaction));
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Unable to save to the database",e);
+            throw new RuntimeException("Unable to read from the DB", e);
         }
+        return accountTransactionDto;
     }
 
-    public List<AccountTransaction> getAllTransactions() {
-        List<AccountTransaction> accountTransactions;
-        try {
-            accountTransactions = new ArrayList<>(repo.findAll());
-        } catch (Exception e) {
-            // TODO: Log
-            throw new RuntimeException("Unable to read from the database",e);
+    @Override
+    public AccountTransactionDto getAccountTransactionDtoByMnemonic(Long memberId)
+    {
+        try{
+            return repo.getAccountTransactionDtoByMnemonic(memberId);
         }
-        return accountTransactions;
+        catch (Exception e){
+            throw new RuntimeException("Unable to read from the DB", e);
+        }
+
     }
 
-    public AccountTransactionDto create(AccountTransactionDto accountTransaction) {
-        try {
-            AccountTransaction transaction = repo.save(accountTransaction.getTransaction());
-            return new AccountTransactionDto(transaction);
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to save to the database",e);
+    @Override
+    public AccountTransactionDto create(AccountTransactionDto accountTransactionDto)
+    {
+        try{
+            AccountTransaction accountTransaction = repo.save(accountTransactionDto.getTransaction());
+            return new AccountTransactionDto(accountTransaction);
+        } catch (Exception e){
+            throw new RuntimeException("Unable to save to the DB", e);
         }
+
     }
 
-    public AccountTransaction getAccountTransactionById(Long id) {
+    @Override
+    public AccountTransactionDto save(AccountTransaction accountTransaction) {
         try {
-            return repo.findById(id).orElse(null);
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to read from the database",e);
+            return new AccountTransactionDto(repo.save(accountTransaction));
+        } catch (Exception e){
+            throw new RuntimeException("Unable to save to the DB", e);
         }
     }
 }

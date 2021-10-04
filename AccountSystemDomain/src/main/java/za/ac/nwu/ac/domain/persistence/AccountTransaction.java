@@ -11,21 +11,22 @@ public class AccountTransaction implements Serializable {
 
     private static final long serialVersionUID = 1199041377884282633L;
     private Long accountTxId;
-    private AccountType accountTypeId; // Foreign Key
+    private AccountType accountType;
+    private Long accountTypeId;
     private Long memberId;
     private Long amount;
     private LocalDate txDate;
 
-    public AccountTransaction(Long accountTxId,AccountType accountTypeId, Long memberId, Long amount, LocalDate txDate) {
+    public AccountTransaction(Long accountTxId,AccountType accountType,Long accountTypeId, Long memberId, Long amount, LocalDate txDate) {
         this.accountTxId = accountTxId;
+        this.accountType = accountType;
         this.accountTypeId = accountTypeId;
         this.memberId = memberId;
         this.amount = amount;
         this.txDate = txDate;
     }
 
-    public AccountTransaction(AccountType accountTypeId, Long memberId, Long amount, LocalDate txDate) {
-        this.accountTypeId = accountTypeId;
+    public AccountTransaction(Long memberId, Long amount, LocalDate txDate) {
         this.memberId = memberId;
         this.amount = amount;
         this.txDate = txDate;
@@ -46,16 +47,24 @@ public class AccountTransaction implements Serializable {
         return accountTxId;
     }
 
-    // Lazy fetch: fetch data when needed
-    @ManyToOne(fetch = FetchType.LAZY) // One account can have many transactions
-    @JoinColumn(name="Account_Type_ID")
-    public AccountType getAccountTypeId() {
-        return accountTypeId;
-    }
-
-    public void setAccountTypeId(AccountType accountTypeId) {
+    public void setAccountTypeId(Long accountTypeId) {
         this.accountTypeId = accountTypeId;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = " Account_Type_ID")
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+//    @Column(name = "Account_Type_ID")
+//    public Long getAccountTypeId() {
+//        return accountTypeId;
+//    }
 
     public void setMemberID(Long memberId) {
         this.memberId = memberId;
@@ -100,9 +109,9 @@ public class AccountTransaction implements Serializable {
     @Override
     public String toString() {
         return "AccountTransaction{" +
-                "accountTxID=" + accountTxId +
+                "accountTxId=" + accountTxId +
                 ", accountTypeID=" + accountTypeId +
-                ", memberID=" + memberId +
+                ", memberId=" + memberId +
                 ", amount=" + amount +
                 ", txDate=" + txDate +
                 '}';
