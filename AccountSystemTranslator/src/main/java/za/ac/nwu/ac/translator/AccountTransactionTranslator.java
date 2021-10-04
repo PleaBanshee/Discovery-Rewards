@@ -6,11 +6,11 @@ import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import java.util.List;
 
 public interface AccountTransactionTranslator {
-    List<AccountTransaction> getAllTransactions();
+    List<AccountTransactionDto> getAllTransactions();
 
     AccountTransactionDto create(AccountTransactionDto accountTransaction);
 
-    AccountTransaction getAccountTransactionById(Long id);
+    AccountTransactionDto getAccountTransactionDtoByMnemonic(Long memberId);
 
-    AccountTransaction save(AccountTransaction accountTransaction);
+    AccountTransactionDto save(AccountTransaction accountTransaction);
 }
