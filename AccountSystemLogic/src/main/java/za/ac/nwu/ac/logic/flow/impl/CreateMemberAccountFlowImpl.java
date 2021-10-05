@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 @Transactional
-@Component("createAccountTransactionFlowName")
+@Component("createMemberAccountFlowName")
 public class CreateMemberAccountFlowImpl implements CreateMemberAccountFlow {
     private final MemberAccountTranslator translator;
 

@@ -10,12 +10,12 @@ import za.ac.nwu.ac.domain.persistence.MemberAccount;
 @Repository
 public interface MemberAccountRepository extends JpaRepository<MemberAccount, Long> {
     @Query(value = "SELECT "+ "mb "+ "FROM " + "MemberAccount mb " + "WHERE " +
-            "mb.memberID = :memberId " + "AND mb.accountTypeId = :accountTypeID")
-    MemberAccount getMember(Long memberID, Long accountTypeID);
+            "mb.memberId = :memberId " + "AND mb.accountTypeId = :accountTypeId")
+    MemberAccount getMember(Long memberId, Long accountTypeId);
 
 
     @Modifying
-    @Query(value = "UPDATE " + "MemberAccount mb " + "SET mb.accountBalance = :Balance " +
-            "WHERE mb.memberId = :memberID " + "AND mb.accountTypeId = :accountTypeID")
-    MemberAccount updateMemberAccount(@Param("Balance") Long accountBalance, @Param("memberID") Long memberID, @Param("accountTypeID") Long accountTypeID);
+    @Query(value = "UPDATE " + "MemberAccount mb " + "SET mb.balance = :balance " +
+            "WHERE mb.memberId = :memberId " + "AND mb.accountTypeId = :accountTypeId")
+    MemberAccount updateMemberAccount(@Param("balance") Long Balance, @Param("memberId") Long memberId, @Param("accountTypeId") Long accountTypeId);
 }

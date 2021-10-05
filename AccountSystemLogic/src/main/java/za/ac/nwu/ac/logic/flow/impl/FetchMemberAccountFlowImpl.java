@@ -8,7 +8,7 @@ import za.ac.nwu.ac.translator.MemberAccountTranslator;
 import javax.transaction.Transactional;
 
 @Transactional
-@Component
+@Component("fetchMemberAccountFlowName")
 public class FetchMemberAccountFlowImpl implements FetchMemberAccountFlow {
     private final MemberAccountTranslator translator;
 
@@ -17,8 +17,8 @@ public class FetchMemberAccountFlowImpl implements FetchMemberAccountFlow {
     }
 
     @Override
-    public MemberAccountDto getMember(Long memberID, Long accountTypeID) {
-        return translator.getMember(memberID, accountTypeID);
+    public MemberAccountDto getMember(Long memberId, Long accountTypeId) {
+        return translator.getMember(memberId, accountTypeId);
     }
 
 

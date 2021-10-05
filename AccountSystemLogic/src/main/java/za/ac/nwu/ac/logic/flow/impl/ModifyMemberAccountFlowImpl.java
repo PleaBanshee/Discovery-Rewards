@@ -8,7 +8,7 @@ import za.ac.nwu.ac.translator.MemberAccountTranslator;
 import javax.transaction.Transactional;
 
 @Transactional
-@Component
+@Component("modifyMemberAccountFlowName")
 public class ModifyMemberAccountFlowImpl implements ModifyMemberAccountFlow {
 
     private final MemberAccountTranslator translator;
