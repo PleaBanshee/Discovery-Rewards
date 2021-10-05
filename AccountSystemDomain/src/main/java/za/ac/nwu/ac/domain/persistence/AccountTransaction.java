@@ -11,7 +11,6 @@ public class AccountTransaction implements Serializable {
 
     private static final long serialVersionUID = 1199041377884282633L;
     private Long accountTxId;
-    // private AccountType accountType;
     private Long accountTypeId;
     private Long memberId;
     private Long amount;
@@ -62,14 +61,6 @@ public class AccountTransaction implements Serializable {
     public Long getAccountTypeId() {
         return accountTypeId;
     }
-
-//    public AccountType getAccountType() {
-//        return accountType;
-//    }
-//
-//    public void setAccountType(AccountType accountType) {
-//        this.accountType = accountType;
-//    }
 
     public void setMemberID(Long memberId) {
         this.memberId = memberId;

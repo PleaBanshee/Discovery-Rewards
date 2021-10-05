@@ -42,6 +42,13 @@ public class AccountTransactionDto implements Serializable {
 
     }
 
+    @ApiModelProperty(position = 1,
+            value = "Account Type ID fo the account transaction",
+            name = "accountTypeId",
+            notes = "Uniquely identifies the account type of the account on which a transaction was performed",
+            dataType = "java.lang.Long",
+            example = "3",
+            required = true)
     public Long getAccountTypeId() {
         return AccountTypeId;
     }
@@ -52,7 +59,7 @@ public class AccountTransactionDto implements Serializable {
 
 
     @ApiModelProperty(
-            position = 1,
+            position = 2,
             value = "Member ID",
             name = "memberId",
             notes = "Uniquely identifies a member",
@@ -69,7 +76,7 @@ public class AccountTransactionDto implements Serializable {
     }
 
     @ApiModelProperty(
-            position =2,
+            position = 3,
             value = "Amount",
             name = "Amount",
             notes = "Amount on the member's account",
@@ -86,7 +93,7 @@ public class AccountTransactionDto implements Serializable {
     }
 
     @ApiModelProperty(
-            position = 3,
+            position = 4,
             value = "Transaction Date",
             name = "txDate",
             notes = "The date the transaction occurred",
@@ -104,7 +111,7 @@ public class AccountTransactionDto implements Serializable {
 
     @JsonIgnore
     public AccountTransaction getTransaction() {
-        return new AccountTransaction(getMemberId(),getAmount(),getTxDate());
+        return new AccountTransaction(getAccountTypeId(),getMemberId(),getAmount(),getTxDate());
     }
 
     @Override

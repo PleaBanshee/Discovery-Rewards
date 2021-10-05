@@ -36,20 +36,20 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
 
     @Override
     @Transactional
-    public MemberAccountDto updateMemberAccount(Long Amount, Long memberID, Long accountTypeID) {
+    public MemberAccountDto updateMemberAccount(Long amount, Long memberId, Long accountTypeId) {
         try {
             Long AccountBalancePrev = 0L;
             Long AccountBalanceUpdate = 0L;
 
-            AccountBalancePrev = getMember(memberID,accountTypeID).getBalance();
-            if( Amount + AccountBalancePrev >= 0L ){
+            AccountBalancePrev = getMember(memberId,accountTypeId).getBalance();
+            if( amount + AccountBalancePrev >= 0L ){
                 AccountTransactionDto accountTransaction = translator.create(
-                        new AccountTransactionDto(memberID, accountTypeID, Amount));
+                        new AccountTransactionDto(memberId, accountTypeId, amount));
 
-                AccountBalanceUpdate = Amount + AccountBalancePrev;
-                MemberAccount MemberAccount = repo.updateMemberAccount(AccountBalanceUpdate, memberID, accountTypeID);
+                AccountBalanceUpdate = amount + AccountBalancePrev;
+                MemberAccount MemberAccount = repo.updateMemberAccount(AccountBalanceUpdate, memberId, accountTypeId);
                 return new MemberAccountDto(MemberAccount);
-            }else{
+            } else {
                 throw new RuntimeException("Cannot subtract an amount larger than your current account balance");
             }
         } catch (Exception e){
