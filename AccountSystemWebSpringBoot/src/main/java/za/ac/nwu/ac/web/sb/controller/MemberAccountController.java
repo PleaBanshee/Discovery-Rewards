@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,9 @@ public class MemberAccountController {
     private final ModifyMemberAccountFlow modifyMemberAccountFlow;
 
     @Autowired
-    public MemberAccountController(CreateMemberAccountFlow createMemberAccountFlow, FetchMemberAccountFlow fetchMemberAccountFlow, ModifyMemberAccountFlow modifyMemberAccountFlow) {
+    public MemberAccountController(@Qualifier("createMemberAccountFlowName") CreateMemberAccountFlow createMemberAccountFlow,
+                                   @Qualifier("fetchMemberAccountFlowName") FetchMemberAccountFlow fetchMemberAccountFlow,
+                                   @Qualifier("modifyMemberAccountFlowName") ModifyMemberAccountFlow modifyMemberAccountFlow) {
         this.createMemberAccountFlow = createMemberAccountFlow;
         this.fetchMemberAccountFlow = fetchMemberAccountFlow;
         this.modifyMemberAccountFlow = modifyMemberAccountFlow;
@@ -43,7 +46,7 @@ public class MemberAccountController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("{memberID}/{accountTypeID}")
+    @GetMapping("{memberId}/{accountTypeId}")
     @ApiOperation(value="Gets a MemberAccount for specified MemberID and AccountTypeID",
             notes = "Gets a MemberAccount for specified MemberID and AccountTypeID")
     @ApiResponses(value = {
@@ -58,14 +61,14 @@ public class MemberAccountController {
                     type = "Long",
                     example = "100000000000001",
                     required = true)
-            @PathVariable("memberID") final Long memberID,
+            @PathVariable("memberId") final Long memberId,
             @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
                     name = "Currency AccountID",
                     type = "Long",
                     example = "100000000000003",
                     required = true)
-            @PathVariable("accountTypeID") final Long accountTypeID){
-        MemberAccountDto MemberAccount =fetchMemberAccountFlow.getMember(memberID , accountTypeID);
+            @PathVariable("accountTypeId") final Long accountTypeId){
+        MemberAccountDto MemberAccount =fetchMemberAccountFlow.getMember(memberId , accountTypeId);
         GeneralResponse<MemberAccountDto> response = new GeneralResponse<>(true, MemberAccount);
         return new ResponseEntity<>(response, HttpStatus.OK);
 

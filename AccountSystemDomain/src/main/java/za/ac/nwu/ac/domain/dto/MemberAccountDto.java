@@ -13,8 +13,8 @@ import java.util.Objects;
 @ApiModel(value = "MemberAccount", description = "This DTO represents the MemberAccount")
 public class MemberAccountDto implements Serializable {
     private static final long serialVersionUID = 5951234213607822710L;
-    private Long memberID;
-    private Long accountTypeID;
+    private Long memberId;
+    private Long accountTypeId;
     private Long balance;
     private LocalDate creationDate;
 
@@ -22,15 +22,15 @@ public class MemberAccountDto implements Serializable {
     }
 
     public MemberAccountDto(Long memberID, Long accountTypeID, Long balance, LocalDate creationDate) {
-        this.memberID = memberID;
-        this.accountTypeID = accountTypeID;
+        this.memberId = memberID;
+        this.accountTypeId = accountTypeID;
         this.balance = balance;
         this.creationDate = creationDate;
     }
 
     public MemberAccountDto(MemberAccount MemberAccount){
-        this.memberID = MemberAccount.getMemberId();
-        this.accountTypeID =MemberAccount.getAccountTypeId();
+        this.memberId = MemberAccount.getMemberId();
+        this.accountTypeId =MemberAccount.getAccountTypeId();
         this.balance =MemberAccount.getBalance();
         this.creationDate = MemberAccount.getCreationDate();
     }
@@ -43,12 +43,12 @@ public class MemberAccountDto implements Serializable {
             dataType = "java.lang.String",
             example ="100000000000001",
             required = true)
-    public Long getMemberID() {
-        return memberID;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setMemberID(Long memberID) {
-        this.memberID = memberID;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     @ApiModelProperty(
@@ -61,11 +61,11 @@ public class MemberAccountDto implements Serializable {
             required = true
     )
     public Long getAccountTypeID() {
-        return accountTypeID;
+        return accountTypeId;
     }
 
     public void setAccountTypeID(Long accountTypeID) {
-        this.accountTypeID = accountTypeID;
+        this.accountTypeId = accountTypeID;
     }
 
     @ApiModelProperty(
@@ -107,24 +107,24 @@ public class MemberAccountDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MemberAccountDto that = (MemberAccountDto) o;
-        return Objects.equals(memberID, that.memberID) && Objects.equals(accountTypeID, that.accountTypeID) && Objects.equals(balance, that.balance) && Objects.equals(creationDate, that.creationDate);
+        return Objects.equals(memberId, that.memberId) && Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(balance, that.balance) && Objects.equals(creationDate, that.creationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberID, accountTypeID, balance, creationDate);
+        return Objects.hash(memberId, accountTypeId, balance, creationDate);
     }
 
     @JsonIgnore
     public MemberAccount getMemberAccount(){
-        return new MemberAccount(getMemberID(), getAccountTypeID(), getBalance(), getCreationDate());
+        return new MemberAccount(getMemberId(), getAccountTypeID(), getBalance(), getCreationDate());
     }
 
     @Override
     public java.lang.String toString() {
         return "MemberAccountDto{" +
-                "memberID=" + memberID +
-                ", accountTypeID=" + accountTypeID +
+                "memberID=" + memberId +
+                ", accountTypeID=" + accountTypeId +
                 ", balance=" + balance +
                 ", creationDate=" + creationDate +
                 '}';

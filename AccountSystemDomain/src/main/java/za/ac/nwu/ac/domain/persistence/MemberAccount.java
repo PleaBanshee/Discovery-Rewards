@@ -12,20 +12,20 @@ public class MemberAccount implements Serializable {
     private Long memberAccountId;
     private Long memberId;
     private Long accountTypeId;
-    private Long Balance;
+    private Long balance;
     private LocalDate creationDate;
 
     public MemberAccount(Long memberAccountId, Long memberId, Long accountTypeId, Long Balance, LocalDate creationDate) {
         this.memberAccountId = memberAccountId;
         this.memberId = memberId;
         this.accountTypeId = accountTypeId;
-        this.Balance = Balance;
+        this.balance = Balance;
         this.creationDate = creationDate;
     }
     public MemberAccount(Long memberId, Long accountTypeId, Long Balance, LocalDate creationDate) {
         this.memberId = memberId;
         this.accountTypeId = accountTypeId;
-        this.Balance = Balance;
+        this.balance = Balance;
         this.creationDate = creationDate;
     }
 
@@ -61,11 +61,11 @@ public class MemberAccount implements Serializable {
 
     @Column(name = "Balance")
     public Long getBalance() {
-        return Balance;
+        return balance;
     }
 
     public void setBalance(Long Balance) {
-        this.Balance = Balance;
+        this.balance = Balance;
     }
 
     @Column(name = "Created_Date")
@@ -83,12 +83,12 @@ public class MemberAccount implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MemberAccount that = (MemberAccount) o;
-        return Objects.equals(memberAccountId, that.memberAccountId) && Objects.equals(memberId, that.memberId) && Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(Balance, that.Balance) && Objects.equals(creationDate, that.creationDate);
+        return Objects.equals(memberAccountId, that.memberAccountId) && Objects.equals(memberId, that.memberId) && Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(balance, that.balance) && Objects.equals(creationDate, that.creationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberAccountId, memberId, accountTypeId, Balance, creationDate);
+        return Objects.hash(memberAccountId, memberId, accountTypeId, balance, creationDate);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class MemberAccount implements Serializable {
                 "memberAccountId=" + memberAccountId +
                 ", memberId=" + memberId +
                 ", accountTypeId=" + accountTypeId +
-                ", Balance=" + Balance +
+                ", Balance=" + balance +
                 ", creationDate=" + creationDate +
                 '}';
     }
