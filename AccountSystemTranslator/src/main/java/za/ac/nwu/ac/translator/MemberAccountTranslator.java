@@ -7,5 +7,5 @@ public interface MemberAccountTranslator {
 
     MemberAccountDto getMember(Long memberID, Long accountTypeID);
 
-    MemberAccountDto updateMemberAccount(Long amount, Long memberId, Long accountTypeId);
+    MemberAccountDto updateMemberAccount(Integer amount, Long memberId, Long accountTypeId);
 }

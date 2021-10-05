@@ -98,7 +98,7 @@ public class MemberAccountController {
                     required = true)
             @RequestParam("accountTypeId") final Long accountTypeId
     ){
-         MemberAccountDto MemberAccount = modifyMemberAccountFlow.updateMemberAccount(Long.parseLong(amount),memberId,accountTypeId);
+         MemberAccountDto MemberAccount = modifyMemberAccountFlow.updateMemberAccount(Integer.parseInt(amount),memberId,accountTypeId);
          GeneralResponse<MemberAccountDto> response = new GeneralResponse<>(true, MemberAccount);
          return new ResponseEntity<>(response, HttpStatus.OK);
     }
