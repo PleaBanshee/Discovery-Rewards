@@ -9,8 +9,4 @@ public interface AccountTransactionTranslator {
     List<AccountTransactionDto> getAllTransactions();
 
     AccountTransactionDto create(AccountTransactionDto accountTransaction);
-
-    AccountTransactionDto getAccountTransactionDtoByMnemonic(Long memberId);
-
-    AccountTransactionDto save(AccountTransaction accountTransaction);
 }

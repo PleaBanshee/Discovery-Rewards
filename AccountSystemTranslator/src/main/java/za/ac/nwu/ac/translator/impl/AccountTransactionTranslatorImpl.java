@@ -36,18 +36,6 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
     }
 
     @Override
-    public AccountTransactionDto getAccountTransactionDtoByMnemonic(Long memberId)
-    {
-        try{
-            return repo.getAccountTransactionDtoByMnemonic(memberId);
-        }
-        catch (Exception e){
-            throw new RuntimeException("Unable to read from the DB", e);
-        }
-
-    }
-
-    @Override
     public AccountTransactionDto create(AccountTransactionDto accountTransactionDto)
     {
         try{
@@ -57,14 +45,5 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
             throw new RuntimeException("Unable to save to the DB", e);
         }
 
-    }
-
-    @Override
-    public AccountTransactionDto save(AccountTransaction accountTransaction) {
-        try {
-            return new AccountTransactionDto(repo.save(accountTransaction));
-        } catch (Exception e){
-            throw new RuntimeException("Unable to save to the DB", e);
-        }
     }
 }

@@ -9,12 +9,15 @@ import za.ac.nwu.ac.domain.persistence.AccountType;
 
 @Repository
 public interface AccountTransactionRepository extends JpaRepository<AccountTransaction, Long> {
-    @Query(value = "SELECT new za.ac.nwu.ac.domain.dto.AccountTransactionDto(" +
-            "at.memberId," + "at.amount," + "at.txDate)" +" FROM " +
-            "AccountTransaction at" + " WHERE at.memberId = :memberId ")
-    AccountTransactionDto getAccountTransactionDtoByMnemonic(Long memberId);
-    @Query( // uses hibernate sql. Refers to database entities in application. More optimal for use on single tables
-            value = "SELECT "+"at "+"FROM "+"AccountTransaction at "+"WHERE at.memberId = :memberId"
-    )
-    AccountType getAccountTypeByMnemonic(Long memberId);
+    //Savepoint
+    @Query(value = "SAVEPOINT SAVE_HERE",nativeQuery = true)
+    void createSavePoint();
+
+    //Committing to database
+    @Query(value = "COMMIT",nativeQuery = true)
+    void commitDB();
+
+    //Transaction Rollbacks
+    @Query(value = "ROLLBACK TO SAVEPOINT SAVE_HERE",nativeQuery = true)
+    void rollbackDB();
 }
