@@ -40,7 +40,6 @@ public class MemberAccountController {
     public ResponseEntity<GeneralResponse<MemberAccountDto>> create(
             @ApiParam(value = "Request body to create a new Member Account", required = true)
             @RequestBody MemberAccountDto MemberAccount ){
-        //ToDO: add if checks to ensure values are added
         MemberAccountDto MemberAccountResponse = createMemberAccountFlow.create(MemberAccount);
         GeneralResponse<MemberAccountDto> response = new GeneralResponse<>(true, MemberAccountResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -74,8 +73,8 @@ public class MemberAccountController {
 
     }
 
-    @PutMapping("{transactionValue}")
-    @ApiOperation(value = "Updates a MemberAccount with the value of a transaction",
+    @PutMapping("{amount}")
+    @ApiOperation(value = "Updates a MemberAccount with the amount of a transaction",
             notes = "")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Account Type Successfully Created", response = GeneralResponse.class),
@@ -83,24 +82,23 @@ public class MemberAccountController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<MemberAccountDto>> updateMemberAccount(
-            @ApiParam(value="Transaction Value",
-                    name="Value of transaction",
-                    example = "600",
+            @ApiParam(value="Amount added to/subtracted from transaction",
+                    name="amount",
+                    example = "550",
                     required = true)
-            @PathVariable("transactionValue") final String transactionValue,
-
+            @PathVariable("amount") final String amount,
             @ApiParam(value = "The MemberID that uniquely identifies the MemberAccountOwner.",
-                    name = "Member 1",
-                    example = "1000000001")
-            @RequestParam("memberID") final Long memberID,
-
-            @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
-                    name="Currency AccountTypeID",
-                    example = "1000000001",
+                    name = "memberId",
+                    example = "110",
                     required = true)
-            @RequestParam("accountTypeID") final Long accountTypeID
+            @RequestParam("memberId") final Long memberId,
+            @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
+                    name="accountTypeId",
+                    example = "2",
+                    required = true)
+            @RequestParam("accountTypeId") final Long accountTypeId
     ){
-         MemberAccountDto MemberAccount = modifyMemberAccountFlow.updateMemberAccount(Long.parseLong(transactionValue),memberID , accountTypeID);
+         MemberAccountDto MemberAccount = modifyMemberAccountFlow.updateMemberAccount(Long.parseLong(amount),memberId,accountTypeId);
          GeneralResponse<MemberAccountDto> response = new GeneralResponse<>(true, MemberAccount);
          return new ResponseEntity<>(response, HttpStatus.OK);
     }

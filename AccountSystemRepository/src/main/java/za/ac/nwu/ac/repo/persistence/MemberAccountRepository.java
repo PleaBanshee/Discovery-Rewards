@@ -15,7 +15,7 @@ public interface MemberAccountRepository extends JpaRepository<MemberAccount, Lo
 
 
     @Modifying
-    @Query(value = "UPDATE " + "MemberAccount mb " + "SET mb.balance = :balance " +
+    @Query(value = "UPDATE " + "MemberAccount mb " + "SET mb.balance = :amount " +
             "WHERE mb.memberId = :memberId " + "AND mb.accountTypeId = :accountTypeId")
-    MemberAccount updateMemberAccount(@Param("balance") Long Balance, @Param("memberId") Long memberId, @Param("accountTypeId") Long accountTypeId);
+    MemberAccount updateMemberAccount(@Param("amount") Long amount, @Param("memberId") Long memberId, @Param("accountTypeId") Long accountTypeId);
 }

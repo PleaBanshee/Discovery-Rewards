@@ -18,8 +18,8 @@ public class ModifyMemberAccountFlowImpl implements ModifyMemberAccountFlow {
     }
 
     @Override
-    public MemberAccountDto updateMemberAccount(Long Amount, Long memberID, Long accountTypeID){
-        return translator.updateMemberAccount(Amount, memberID, accountTypeID);
+    public MemberAccountDto updateMemberAccount(Long amount, Long memberId, Long accountTypeId){
+        return translator.updateMemberAccount(amount, memberId, accountTypeId);
     }
 
 }

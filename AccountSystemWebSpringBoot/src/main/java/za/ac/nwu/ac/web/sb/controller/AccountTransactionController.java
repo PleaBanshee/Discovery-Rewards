@@ -37,7 +37,7 @@ public class AccountTransactionController {
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Not Found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAll() {
+    public ResponseEntity<GeneralResponse<List<AccountTransactionDto>>> getAllTransactions() {
         List<AccountTransactionDto> accountTransactions = fetchAccountTransactionFlow.getAllTransactions();
         GeneralResponse<List<AccountTransactionDto>> response = new GeneralResponse<>(true, accountTransactions);
         return new ResponseEntity<>(response, HttpStatus.OK);
