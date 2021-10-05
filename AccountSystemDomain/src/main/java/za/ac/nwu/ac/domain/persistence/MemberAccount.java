@@ -12,20 +12,20 @@ public class MemberAccount implements Serializable {
     private Long memberAccountId;
     private Long memberId;
     private Long accountTypeId;
-    private Long balance;
+    private Integer balance;
     private LocalDate creationDate;
 
     public MemberAccount() {
     }
 
-    public MemberAccount(Long memberAccountId, Long memberId, Long accountTypeId, Long Balance, LocalDate creationDate) {
+    public MemberAccount(Long memberAccountId, Long memberId, Long accountTypeId, Integer Balance, LocalDate creationDate) {
         this.memberAccountId = memberAccountId;
         this.memberId = memberId;
         this.accountTypeId = accountTypeId;
         this.balance = Balance;
         this.creationDate = creationDate;
     }
-    public MemberAccount(Long memberId, Long accountTypeId, Long Balance, LocalDate creationDate) {
+    public MemberAccount(Long memberId, Long accountTypeId, Integer Balance, LocalDate creationDate) {
         this.memberId = memberId;
         this.accountTypeId = accountTypeId;
         this.balance = Balance;
@@ -63,11 +63,11 @@ public class MemberAccount implements Serializable {
     }
 
     @Column(name = "Balance")
-    public Long getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(Long Balance) {
+    public void setBalance(Integer Balance) {
         this.balance = Balance;
     }
 

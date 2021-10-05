@@ -13,10 +13,10 @@ public class AccountTransaction implements Serializable {
     private Long accountTxId;
     private Long accountTypeId;
     private Long memberId;
-    private Long amount;
+    private Integer amount;
     private LocalDate txDate;
 
-    public AccountTransaction(Long accountTxId,Long accountTypeId, Long memberId, Long amount, LocalDate txDate) {
+    public AccountTransaction(Long accountTxId,Long accountTypeId, Long memberId, Integer amount, LocalDate txDate) {
         this.accountTxId = accountTxId;
         this.accountTypeId = accountTypeId;
         this.memberId = memberId;
@@ -24,14 +24,14 @@ public class AccountTransaction implements Serializable {
         this.txDate = txDate;
     }
 
-    public AccountTransaction(Long accountTypeId, Long memberId, Long amount, LocalDate txDate) {
+    public AccountTransaction(Long accountTypeId, Long memberId, Integer amount, LocalDate txDate) {
         this.accountTypeId = accountTypeId;
         this.memberId = memberId;
         this.amount = amount;
         this.txDate = txDate;
     }
 
-    public AccountTransaction(Long memberId, Long amount, LocalDate txDate) {
+    public AccountTransaction(Long memberId, Integer amount, LocalDate txDate) {
         this.memberId = memberId;
         this.amount = amount;
         this.txDate = txDate;
@@ -71,12 +71,12 @@ public class AccountTransaction implements Serializable {
         return memberId;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
     @Column(name="Amount")
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 

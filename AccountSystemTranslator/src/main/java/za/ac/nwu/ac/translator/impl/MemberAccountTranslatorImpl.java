@@ -36,16 +36,14 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
 
     @Override
     @Transactional
-    public MemberAccountDto updateMemberAccount(Long amount, Long memberId, Long accountTypeId) {
+    public MemberAccountDto updateMemberAccount(Integer amount, Long memberId, Long accountTypeId) {
         try {
-            Long AccountBalancePrev = 0L;
-            Long AccountBalanceUpdate = 0L;
-
+            Integer AccountBalancePrev = 0;
+            Integer AccountBalanceUpdate = 0;
             AccountBalancePrev = getMember(memberId,accountTypeId).getBalance();
-            if( amount + AccountBalancePrev >= 0L ){
+            if( amount + AccountBalancePrev >= 0 ){
                 AccountTransactionDto accountTransaction = translator.create(
                         new AccountTransactionDto(memberId, accountTypeId, amount));
-
                 AccountBalanceUpdate = amount + AccountBalancePrev;
                 MemberAccount MemberAccount = repo.updateMemberAccount(AccountBalanceUpdate, memberId, accountTypeId);
                 return new MemberAccountDto(MemberAccount);
@@ -55,8 +53,6 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
         } catch (Exception e){
             throw new RuntimeException("Unable to update DB", e);
         }
-
-
     }
 
     @Override

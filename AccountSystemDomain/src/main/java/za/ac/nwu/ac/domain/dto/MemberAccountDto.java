@@ -15,13 +15,13 @@ public class MemberAccountDto implements Serializable {
     private static final long serialVersionUID = 5951234213607822710L;
     private Long memberId;
     private Long accountTypeId;
-    private Long balance;
+    private Integer balance;
     private LocalDate creationDate;
 
     public MemberAccountDto() {
     }
 
-    public MemberAccountDto(Long memberID, Long accountTypeID, Long balance, LocalDate creationDate) {
+    public MemberAccountDto(Long memberID, Long accountTypeID, Integer balance, LocalDate creationDate) {
         this.memberId = memberID;
         this.accountTypeId = accountTypeID;
         this.balance = balance;
@@ -31,7 +31,7 @@ public class MemberAccountDto implements Serializable {
     public MemberAccountDto(MemberAccount MemberAccount){
         this.memberId = MemberAccount.getMemberId();
         this.accountTypeId =MemberAccount.getAccountTypeId();
-        this.balance =MemberAccount.getBalance();
+        this.balance = MemberAccount.getBalance();
         this.creationDate = MemberAccount.getCreationDate();
     }
 
@@ -78,11 +78,11 @@ public class MemberAccountDto implements Serializable {
             example = "42069",
             required = true
     )
-    public Long getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 

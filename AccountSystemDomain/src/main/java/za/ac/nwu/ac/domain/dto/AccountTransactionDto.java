@@ -16,16 +16,16 @@ public class AccountTransactionDto implements Serializable {
 
     private Long AccountTypeId;
     private Long memberId;
-    private Long amount;
+    private Integer amount;
     private LocalDate txDate;
 
-    public AccountTransactionDto(Long memberId, Long amount, LocalDate txDate) {
+    public AccountTransactionDto(Long memberId, Integer amount, LocalDate txDate) {
         this.memberId = memberId;
         this.amount = amount;
         this.txDate = txDate;
     }
 
-    public AccountTransactionDto(Long memberID, Long AccountTypeId, Long amount) {
+    public AccountTransactionDto(Long memberID, Long AccountTypeId, Integer amount) {
         this.memberId = memberId;
         this.AccountTypeId = AccountTypeId;
         this.amount = amount;
@@ -84,11 +84,11 @@ public class AccountTransactionDto implements Serializable {
             example = "200",
             required = true
     )
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
