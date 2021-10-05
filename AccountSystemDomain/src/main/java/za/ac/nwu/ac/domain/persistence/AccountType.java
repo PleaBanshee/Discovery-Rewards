@@ -1,5 +1,7 @@
 package za.ac.nwu.ac.domain.persistence;
 
+import za.ac.nwu.ac.domain.dto.MemberAccountDto;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.io.Serializable;
@@ -16,6 +18,7 @@ public class AccountType implements Serializable {
     private String accountTypeName;
     private LocalDate creationDate;
     private Set<AccountTransaction> accountTransactions;
+    private Set<MemberAccount> memberAccount;
 
     public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeId = accountTypeId;
@@ -73,13 +76,12 @@ public class AccountType implements Serializable {
         return creationDate;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class,fetch = FetchType.LAZY,mappedBy = "accountType",orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<AccountTransaction> getAccountTransactions() {
-        return accountTransactions; // returns a list without duplicate values
-    }
-
     public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
         this.accountTransactions = accountTransactions;
+    }
+
+    public void setMemberAccount(Set<MemberAccount> memberAccount) {
+        this.memberAccount = memberAccount;
     }
 
     @Override

@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface FetchAccountTransactionFlow {
     List<AccountTransactionDto> getAllTransactions();
-    AccountTransactionDto getAccountTransactionByMnemonic(Long memberId);
 }

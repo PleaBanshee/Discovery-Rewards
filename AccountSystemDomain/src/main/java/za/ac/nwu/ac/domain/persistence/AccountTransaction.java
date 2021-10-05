@@ -11,15 +11,21 @@ public class AccountTransaction implements Serializable {
 
     private static final long serialVersionUID = 1199041377884282633L;
     private Long accountTxId;
-    private AccountType accountType;
+    // private AccountType accountType;
     private Long accountTypeId;
     private Long memberId;
     private Long amount;
     private LocalDate txDate;
 
-    public AccountTransaction(Long accountTxId,AccountType accountType,Long accountTypeId, Long memberId, Long amount, LocalDate txDate) {
+    public AccountTransaction(Long accountTxId,Long accountTypeId, Long memberId, Long amount, LocalDate txDate) {
         this.accountTxId = accountTxId;
-        this.accountType = accountType;
+        this.accountTypeId = accountTypeId;
+        this.memberId = memberId;
+        this.amount = amount;
+        this.txDate = txDate;
+    }
+
+    public AccountTransaction(Long accountTypeId, Long memberId, Long amount, LocalDate txDate) {
         this.accountTypeId = accountTypeId;
         this.memberId = memberId;
         this.amount = amount;
@@ -51,19 +57,18 @@ public class AccountTransaction implements Serializable {
         this.accountTypeId = accountTypeId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = " Account_Type_ID")
-    public AccountType getAccountType() {
-        return accountType;
+    // @Column(name = "Account_Type_ID")
+    @JoinColumn(name = "Account_Type_ID")
+    public Long getAccountTypeId() {
+        return accountTypeId;
     }
 
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
-//    @Column(name = "Account_Type_ID")
-//    public Long getAccountTypeId() {
-//        return accountTypeId;
+//    public AccountType getAccountType() {
+//        return accountType;
+//    }
+//
+//    public void setAccountType(AccountType accountType) {
+//        this.accountType = accountType;
 //    }
 
     public void setMemberID(Long memberId) {

@@ -13,11 +13,19 @@ import java.util.Objects;
 public class AccountTypeDto implements Serializable {
     private static final long serialVersionUID = -5346853206480289868L;
 
+    private Long accountTypeId;
     private String mnemonic;
     private String accountTypeName;
     private LocalDate creationDate;
 
     public AccountTypeDto(String mnemonic, String accountTypeName, LocalDate creationDate) {
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.creationDate = creationDate;
+    }
+
+    public AccountTypeDto(Long accountTypeID, String mnemonic, String accountTypeName, LocalDate creationDate) {
+        this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
         this.creationDate = creationDate;
@@ -83,6 +91,15 @@ public class AccountTypeDto implements Serializable {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @JsonIgnore
+    public Long getAccountTypeId() {
+        return accountTypeId;
+    }
+    @JsonIgnore
+    public void setAccountTypeId(Long accountTypeId) {
+        this.accountTypeId = accountTypeId;
     }
 
     @Override

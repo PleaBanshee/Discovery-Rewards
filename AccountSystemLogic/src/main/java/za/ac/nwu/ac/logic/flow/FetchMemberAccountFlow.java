@@ -3,5 +3,5 @@ package za.ac.nwu.ac.logic.flow;
 import za.ac.nwu.ac.domain.dto.MemberAccountDto;
 
 public interface FetchMemberAccountFlow {
-    MemberAccountDto getMemberByMemberIDandAccountID(Long memberID, Long accountTypeID);
+    MemberAccountDto getMember(Long memberID, Long accountTypeID);
 }

@@ -13,6 +13,8 @@ import java.util.Objects;
 public class AccountTransactionDto implements Serializable {
 
     private static final long serialVersionUID = -7819344808062462808L;
+
+    private Long AccountTypeId;
     private Long memberId;
     private Long amount;
     private LocalDate txDate;
@@ -21,6 +23,13 @@ public class AccountTransactionDto implements Serializable {
         this.memberId = memberId;
         this.amount = amount;
         this.txDate = txDate;
+    }
+
+    public AccountTransactionDto(Long memberID, Long AccountTypeId, Long amount) {
+        this.memberId = memberId;
+        this.AccountTypeId = AccountTypeId;
+        this.amount = amount;
+        this.txDate = LocalDate.now();
     }
 
     public AccountTransactionDto(AccountTransaction accountTransaction) {
@@ -32,6 +41,15 @@ public class AccountTransactionDto implements Serializable {
     public AccountTransactionDto() {
 
     }
+
+    public Long getAccountTypeId() {
+        return AccountTypeId;
+    }
+
+    public void setAccountTypeId(Long accountTypeId) {
+        AccountTypeId = accountTypeId;
+    }
+
 
     @ApiModelProperty(
             position = 1,
@@ -94,18 +112,19 @@ public class AccountTransactionDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransactionDto that = (AccountTransactionDto) o;
-        return Objects.equals(memberId, that.memberId) && Objects.equals(amount, that.amount) && Objects.equals(txDate, that.txDate);
+        return Objects.equals(AccountTypeId, that.AccountTypeId) && Objects.equals(memberId, that.memberId) && Objects.equals(amount, that.amount) && Objects.equals(txDate, that.txDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberId, amount, txDate);
+        return Objects.hash(AccountTypeId, memberId, amount, txDate);
     }
 
     @Override
     public String toString() {
         return "AccountTransactionDto{" +
-                "memberId=" + memberId +
+                "AccountTypeId=" + AccountTypeId +
+                ", memberId=" + memberId +
                 ", amount=" + amount +
                 ", txDate=" + txDate +
                 '}';

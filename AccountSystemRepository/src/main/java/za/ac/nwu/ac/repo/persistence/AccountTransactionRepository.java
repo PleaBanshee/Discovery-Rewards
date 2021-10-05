@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import org.springframework.data.jpa.repository.Query;
+import za.ac.nwu.ac.domain.persistence.AccountType;
 
 @Repository
 public interface AccountTransactionRepository extends JpaRepository<AccountTransaction, Long> {
@@ -12,4 +13,8 @@ public interface AccountTransactionRepository extends JpaRepository<AccountTrans
             "at.memberId," + "at.amount," + "at.txDate)" +" FROM " +
             "AccountTransaction at" + " WHERE at.memberId = :memberId ")
     AccountTransactionDto getAccountTransactionDtoByMnemonic(Long memberId);
+    @Query( // uses hibernate sql. Refers to database entities in application. More optimal for use on single tables
+            value = "SELECT "+"at "+"FROM "+"AccountTransaction at "+"WHERE at.memberId = :memberId"
+    )
+    AccountType getAccountTypeByMnemonic(Long memberId);
 }
