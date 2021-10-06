@@ -56,13 +56,13 @@ public class MemberAccountController {
     })
     public ResponseEntity<GeneralResponse<MemberAccountDto>> getMember(
             @ApiParam(value = "The MemberID that uniquely identifies the MemberAccountOwner.",
-                    name = "Member 1",
+                    name = "memberId",
                     type = "Long",
                     example = "100000000000001",
                     required = true)
             @PathVariable("memberId") final Long memberId,
             @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
-                    name = "Currency AccountID",
+                    name = "accountTypeId",
                     type = "Long",
                     example = "100000000000003",
                     required = true)
