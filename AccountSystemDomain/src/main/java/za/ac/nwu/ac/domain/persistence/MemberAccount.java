@@ -32,6 +32,12 @@ public class MemberAccount implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public MemberAccount(Integer Balance,Long memberId, Long accountTypeId) {
+        this.memberId = memberId;
+        this.accountTypeId = accountTypeId;
+        this.balance = Balance;
+    }
+
     @Id
     @SequenceGenerator(name = "ACC_MEMBER_SEQ", sequenceName = "HR.ACC_MEMBER_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACC_MEMBER_SEQ")

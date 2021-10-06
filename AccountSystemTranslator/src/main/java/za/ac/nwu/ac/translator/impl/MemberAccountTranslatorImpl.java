@@ -42,11 +42,10 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
             Integer AccountBalanceUpdate = 0;
             AccountBalancePrev = getMember(memberId,accountTypeId).getBalance();
             if( amount + AccountBalancePrev >= 0 ){
-                AccountTransactionDto accountTransaction = translator.create(
-                        new AccountTransactionDto(memberId, accountTypeId, amount));
                 AccountBalanceUpdate = amount + AccountBalancePrev;
-                MemberAccount MemberAccount = repo.updateMemberAccount(AccountBalanceUpdate, memberId, accountTypeId);
-                return new MemberAccountDto(MemberAccount);
+                MemberAccount memberAccount =new MemberAccount(amount, memberId,accountTypeId);
+                repo.updateMemberAccount(AccountBalanceUpdate, memberId, accountTypeId);
+                return new MemberAccountDto(memberAccount);
             } else {
                 throw new RuntimeException("Cannot subtract an amount larger than your current account balance");
             }
