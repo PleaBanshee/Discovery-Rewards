@@ -38,17 +38,9 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
     @Transactional
     public MemberAccountDto updateMemberAccount(Integer amount, Long memberId, Long accountTypeId) {
         try {
-            Integer AccountBalancePrev = 0;
-            Integer AccountBalanceUpdate = 0;
-            AccountBalancePrev = getMember(memberId,accountTypeId).getBalance();
-            if( amount + AccountBalancePrev >= 0 ){
-                AccountBalanceUpdate = amount + AccountBalancePrev;
-                MemberAccount memberAccount =new MemberAccount(amount, memberId,accountTypeId);
-                repo.updateMemberAccount(AccountBalanceUpdate, memberId, accountTypeId);
-                return new MemberAccountDto(memberAccount);
-            } else {
-                throw new RuntimeException("Cannot subtract an amount larger than your current account balance");
-            }
+            MemberAccount memberAccount =new MemberAccount(amount,memberId,accountTypeId);
+            repo.updateMemberAccount(amount,memberId,accountTypeId);
+            return new MemberAccountDto(memberAccount);
         } catch (Exception e){
             throw new RuntimeException("Unable to update DB", e);
         }
@@ -57,8 +49,8 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
     @Override
     public MemberAccountDto getMember(Long memberID, Long accountTypeID) {
         try {
-            MemberAccount MemberAccount=repo.getMember(memberID, accountTypeID);
-            return new MemberAccountDto(MemberAccount);
+            MemberAccount memberAccount = repo.getMember(memberID, accountTypeID);
+            return new MemberAccountDto(memberAccount);
         } catch (Exception e){
             throw new RuntimeException("Unable to read from the DB", e);
         }
