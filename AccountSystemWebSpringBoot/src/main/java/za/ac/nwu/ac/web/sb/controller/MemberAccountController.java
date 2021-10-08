@@ -93,7 +93,7 @@ public class MemberAccountController {
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
-    public ResponseEntity<GeneralResponse<MemberAccountDto>> updateUserAccount(
+    public ResponseEntity<GeneralResponse<MemberAccountDto>> subtractMiles(
             @ApiParam(value="Transaction Value",
                     name="subtractVal",
                     example = "550",
@@ -135,19 +135,17 @@ public class MemberAccountController {
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
-    public ResponseEntity<GeneralResponse<MemberAccountDto>> addCurrencyToUserAccount(
+    public ResponseEntity<GeneralResponse<MemberAccountDto>> addMiles(
             @ApiParam(value="Transaction Value",
                     name="addVal",
                     example = "550",
                     required = true)
             @PathVariable("addVal") final String transactionValue,
-
             @ApiParam(value = "The MemberID that uniquely identifies the UserAccountOwner.",
                     name = "memberId",
                     example = "110",
                     required = true)
             @RequestParam("memberId") final Long memberId,
-
             @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
                     name="accountTypeId",
                     example = "2",
