@@ -16,12 +16,10 @@ import javax.transaction.Transactional;
 public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
 
     private final MemberAccountRepository repo;
-    private final AccountTransactionTranslator translator;
 
     @Autowired
-    public MemberAccountTranslatorImpl(MemberAccountRepository repo, AccountTransactionTranslator translator) {
+    public MemberAccountTranslatorImpl(MemberAccountRepository repo) {
         this.repo = repo;
-        this.translator = translator;
     }
 
     @Override
@@ -38,7 +36,7 @@ public class MemberAccountTranslatorImpl implements MemberAccountTranslator {
     @Transactional
     public MemberAccountDto updateMemberAccount(Integer amount, Long memberId, Long accountTypeId) {
         try {
-            MemberAccount memberAccount =new MemberAccount(amount,memberId,accountTypeId);
+            MemberAccount memberAccount = new MemberAccount(amount,memberId,accountTypeId);
             repo.updateMemberAccount(amount,memberId,accountTypeId);
             return new MemberAccountDto(memberAccount);
         } catch (Exception e){

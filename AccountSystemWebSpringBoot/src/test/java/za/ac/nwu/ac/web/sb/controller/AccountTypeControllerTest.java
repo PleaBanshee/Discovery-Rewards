@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
-// import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +46,8 @@ public class AccountTypeControllerTest {
     private FetchAccountTypeFlow fetchAccountTypeFlow;
     @Mock
     private CreateAccountTypeFlow createAccountTypeFlow;
-    /* @Mock
-    private ModifyAccountTypeFlow modifyAccountTypeFlow
-    */
+    @Mock
+    private ModifyAccountTypeFlow modifyAccountTypeFlow;
     @InjectMocks
     private AccountTypeController controller;
     private MockMvc mockMvc;
@@ -101,33 +100,13 @@ public class AccountTypeControllerTest {
                 mvcResult.getResponse().getContentAsString());
     }
 
-   /* @Test
-    public void deleteAccountType() throws Exception {
-        String expectedResponse = "{\"successful\":true,\"payload\":" +
-                "{\"mnemonic\":\"PLAY\",\"accountTypeName\":\"Play account type\",\"creationDate\":[2021,4,1]}}";
-        AccountTypeDto accountType = new AccountTypeDto("PLAY", "Play account type", LocalDate.parse("2021-04-01"));
-                when(modifyAccountTypeFlow.deleteAccountType(anyString())).thenReturn(accountType);
-        MvcResult mvcResult = mockMvc.perform(delete((String.format("%s/%s",
-                        ACCOUNT_TYPE_CONTROLLER_URL, "PLAY")))
-                        .servletPath(APP_URL)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-        verify(modifyAccountTypeFlow,
-                times(1)).deleteAccountType(eq("PLAY"));
-        assertEquals(expectedResponse,
-                mvcResult.getResponse().getContentAsString());
-    }*/
-
-    /*@Test
+    @Test
     public void updateAccountType() throws Exception {
         String expectedResponse = "{\"successful\":true,\"payload\":" +
                 "{\"mnemonic\":\"PLAY\",\"accountTypeName\":\"The new Play account type name\",\"creationDate\":[2021,4,1]}}";
         AccountTypeDto accountType = new AccountTypeDto("PLAY", "The new Play account type name",
                 LocalDate.parse("2021-04-01"));
-        when(modifyAccountTypeFlow.updateAccountType(anyString(),
-                anyString(), any(LocalDate.class))).thenReturn(accountType);
+        when(modifyAccountTypeFlow.updateAccountType(any(AccountTypeDto.class))).thenReturn(accountType);
         MvcResult mvcResult = mockMvc.perform(put((String.format("%s/%s",
                 ACCOUNT_TYPE_CONTROLLER_URL, "PLAY")))
                 .param("newAccountTypeName", "The new Play account type name")
@@ -138,21 +117,18 @@ public class AccountTypeControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         verify(modifyAccountTypeFlow,
-                times(1)).updateAccountType(eq("PLAY"),
-                eq("The new Play account type name"),
-                eq(LocalDate.parse("2021-04-01")));
+                times(1)).updateAccountType(accountType);
         assertEquals(expectedResponse,
                 mvcResult.getResponse().getContentAsString());
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void updateAccountTypeWithNoOptionalDate() throws Exception {
         String expectedResponse = "{\"successful\":true,\"payload\":" +
                 "{\"mnemonic\":\"PLAY\",\"accountTypeName\":\"The new Play account type name\",\"creationDate\":[2021,9,1]}}";
         AccountTypeDto accountType = new AccountTypeDto("PLAY", "The new Play account type name",
-                LocalDate.parse("2021-09-01"));
-        when(modifyAccountTypeFlow.updateAccountType(anyString(),
-                anyString(), isNull())).thenReturn(accountType);
+                LocalDate.parse("2021-01-01"));
+        when(modifyAccountTypeFlow.updateAccountType(any(AccountTypeDto.class))).thenReturn(accountType);
         MvcResult mvcResult = mockMvc.perform(put((String.format("%s/%s",
                 ACCOUNT_TYPE_CONTROLLER_URL, "PLAY")))
                 .param("newAccountTypeName", "The new Play account type name")
@@ -162,12 +138,12 @@ public class AccountTypeControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         verify(modifyAccountTypeFlow,
-                times(1)).updateAccountType(eq("PLAY"),
-                eq("The new Play account type name"), eq(null));
+                times(1)).updateAccountType(eq(accountType));
         assertEquals(expectedResponse,
                 mvcResult.getResponse().getContentAsString());
-    }*/
-    /*@Test
+    }
+
+    @Test
     public void updateAccountTypeObitMandatory() throws Exception {
         mockMvc.perform(put((String.format("%s/%s",
                                 ACCOUNT_TYPE_CONTROLLER_URL, "PLAY")))
@@ -177,10 +153,10 @@ public class AccountTypeControllerTest {
                 .andExpect(status().isBadRequest())
                 .andReturn();
         verify(modifyAccountTypeFlow,
-                never()).updateAccountType(anyString(), anyString(), any(LocalDate.class));
+                never()).updateAccountType(any(AccountTypeDto.class));
         verify(modifyAccountTypeFlow,
-                never()).updateAccountType(anyString(), anyString(), isNull());
+                never()).updateAccountType(any(AccountTypeDto.class));
         verify(modifyAccountTypeFlow,
-                never()).updateAccountType(anyString(), isNull(), isNull());
-    }*/
+                never()).updateAccountType(any(AccountTypeDto.class));
+    }
 }
