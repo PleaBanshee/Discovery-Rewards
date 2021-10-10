@@ -64,7 +64,7 @@ public class AccountTransactionDto implements Serializable {
             name = "memberId",
             notes = "Uniquely identifies a member",
             dataType = "java.lang.String",
-            example = "1001",
+            example = "110",
             required = true
     )
     public Long getMemberId() {

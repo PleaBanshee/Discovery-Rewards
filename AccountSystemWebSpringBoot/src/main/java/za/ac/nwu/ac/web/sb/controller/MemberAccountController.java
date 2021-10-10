@@ -20,7 +20,7 @@ import za.ac.nwu.ac.logic.flow.ModifyMemberAccountFlow;
 @RestController
 @RequestMapping("member-account")
 public class MemberAccountController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MemberAccountController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MemberAccountController.class);
     private final CreateMemberAccountFlow createMemberAccountFlow;
     private final FetchMemberAccountFlow fetchMemberAccountFlow;
     private final ModifyMemberAccountFlow modifyMemberAccountFlow;
@@ -74,10 +74,10 @@ public class MemberAccountController {
             member = Long.parseLong(memberId);
             account = Long.parseLong(accountTypeId);
         } catch (NumberFormatException e) {
-            LOGGER.error("Parses Failed", e);
+            logger.error("Parses Failed", e);
             throw new RuntimeException("Unable to format types",e);
         }
-        LOGGER.info("Attempting to find User Account with properties: " +
+        logger.info("Attempting to find User Account with properties: " +
                 "\nAccountTypeID = {}" +
                 "\nMemberID = {}",accountTypeId,memberId);
         MemberAccountDto memberAccount = fetchMemberAccountFlow.getMember(member,account);
@@ -116,13 +116,13 @@ public class MemberAccountController {
         try {
             intToPass =Integer.parseInt(transactionValue);
         } catch (NumberFormatException e){
-            LOGGER.error("TransactionValue Parse Failed", e);
+            logger.error("TransactionValue Parse Failed", e);
         }
-        LOGGER.info("Value of TransactionValue {}",transactionValue);
-        LOGGER.info("Value of MemberID {}",memberId);
-        LOGGER.info("Value of AccountTypeID {}",accountTypeId);
+        logger.info("Value of TransactionValue {}",transactionValue);
+        logger.info("Value of MemberID {}",memberId);
+        logger.info("Value of AccountTypeID {}",accountTypeId);
         MemberAccountDto memberAccount = modifyMemberAccountFlow.subtractMiles(intToPass,memberId,accountTypeId);
-        LOGGER.info("Update Operation Completed Successfully");
+        logger.info("Update Operation Completed Successfully");
         GeneralResponse<MemberAccountDto> response = new GeneralResponse<>(true, memberAccount);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -152,17 +152,17 @@ public class MemberAccountController {
                     required = true)
             @RequestParam("accountTypeId") final Long accountTypeId
     ){
-        Integer intToPass =0;
+        Integer transactVal =0;
         try{
-            intToPass =Integer.parseInt(transactionValue);
-        }catch (NumberFormatException e){
-            LOGGER.error("TransactionValue Parse Failed", e);
+            transactVal = Integer.parseInt(transactionValue);
+        } catch (NumberFormatException e){
+            logger.error("TransactionValue Parse Failed", e);
         }
-        LOGGER.info("Value of TransactionValue {}",transactionValue);
-        LOGGER.info("Value of MemberID {}",memberId);
-        LOGGER.info("Value of AccountTypeID {}",accountTypeId);
-        MemberAccountDto memberAccount = modifyMemberAccountFlow.addMiles(intToPass,memberId ,accountTypeId);
-        LOGGER.info("Update Operation Completed Successfully");
+        logger.info("Transaction Value: {}",transactionValue);
+        logger.info("Member ID: {}",memberId);
+        logger.info("Account Type ID {}",accountTypeId);
+        MemberAccountDto memberAccount = modifyMemberAccountFlow.addMiles(transactVal,memberId ,accountTypeId);
+        logger.info("Update Operation Completed Successfully!");
         GeneralResponse<MemberAccountDto> response = new GeneralResponse<>(true, memberAccount);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

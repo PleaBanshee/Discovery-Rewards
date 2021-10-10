@@ -41,7 +41,7 @@ public class MemberAccountDto implements Serializable {
             name = "MemberID",
             notes = "Unique Member ID for the Member that owns the account",
             dataType = "java.lang.String",
-            example ="100000000000001",
+            example ="110",
             required = true)
     public Long getMemberId() {
         return memberId;
@@ -57,7 +57,7 @@ public class MemberAccountDto implements Serializable {
             name = "AccountTypeID",
             notes = "The AccountTypeID for the specific AccountType",
             dataType = "java.lang.String",
-            example = "100000000000003",
+            example = "2",
             required = true
     )
     public Long getAccountTypeID() {
@@ -75,7 +75,7 @@ public class MemberAccountDto implements Serializable {
             notes = "Contains the amount of a currency that a User " +
                     "has in their account and is allowed to spend.",
             dataType = "java.lang.Integer",
-            example = "42069",
+            example = "5500",
             required = true
     )
     public Integer getBalance() {
